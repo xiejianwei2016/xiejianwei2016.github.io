@@ -1,1 +1,37 @@
-theme: jekyll-theme-cayman
+# Site settings
+name: Blog  of Peng Xiaoyong
+email: 1280272327@qq.com
+author: Peng Xiaoyong (JamesPxy)
+url: https://xiejianwei2016.github.io/
+resume_site: https://github.com/JamesPxy
+github: https://github.com/JamesPxy
+baseurl: ""
+description: Action  speaks louder than  words , Just do  it !
+meta_description: 彭湃的个人博客，每日积累，厚积薄发！
+motto: 每日积累，厚积薄发！
+banner:  彭晓勇的个人博客，不忘初心，水滴石穿，贵在坚持！（Good  good  study,day  day  up!!!）
+
+#permalink: /:categories/:year/:month/:day/:title/
+permalink: /:year/:month/:day/:title/
+paginate: 10
+
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
+
+github_username: xiejianwei2016
+highlighter: rouge
+
+# Build settings
+markdown: kramdown
+
+FB:
+  comments :
+    provider : duoshuo
+    duoshuo:
+        short_name : xiejianwei
+    # disqus :
+    #     short_name : freudkang
+    # facebook :
+    #   appid : 123
+    #   num_posts: 5
+    #   width: 580
+    #   colorscheme: light
