@@ -1,9 +1,8 @@
 ---
 date: 2017-02-28 16:02
-description: java中三种位移运算
 layout: post
-status: public
 title: java位移运算
+categories: java
 ---
 
 #### java中有三种移位运算符

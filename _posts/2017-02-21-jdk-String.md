@@ -1,11 +1,8 @@
 ---
-comments: true
 date: 2017-02-21 00:00
-description: java中最常用的类
 layout: post
-share: true
-status: public
 title: JDK-String类源代码分析
+categories: java
 ---
 
 java.lang.String 表示字符串。
