@@ -13,14 +13,14 @@ categories: java
 \>\>\>    :     无符号右移，运算规则：按二进制形式把所有的数字向右移动对应位数，低位移出(舍弃)，高位的空位补零。对于正数来说和带符号右移相同，对于负数来说不同。 其他结构和>>相似。忽略符号位，空位都以0补齐。
 ###举例
 ```java
-	@Test
-	public void testBitwise() {
-			int number = 10;
-			int b = number << 1;
-			System.out.print(b+":");
-			int c = number >> 1;
-			System.out.print(c);
-	}
+@Test
+public void testBitwise() {
+	int number = 10;
+	int b = number << 1;
+	System.out.print(b+":");
+	int c = number >> 1;
+	System.out.print(c);
+}
 ```
-运行结果：  20--5  
+运行结果：  20:5  
 
