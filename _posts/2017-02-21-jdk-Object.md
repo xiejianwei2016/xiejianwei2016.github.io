@@ -1,8 +1,8 @@
 ---
 date: 2017-02-21 00:00
 layout: post
-title: JDK-Object类详解
-categories: java
+title: java.lang.Object 源代码阅读
+categories: jdk1.7
 ---
 
 java.lang.Object类作为类继承层次中的根。Obejct是所有类的父类。所对有象，包括数组，

@@ -1,8 +1,8 @@
 ---
 date: 2017-02-21 00:00
 layout: post
-title: JDK-String类源代码分析
-categories: java
+title: java.lang.String 源代码阅读
+categories: jdk1.7
 ---
 
 java.lang.String 表示字符串。

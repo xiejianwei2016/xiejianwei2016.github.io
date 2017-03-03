@@ -1,8 +1,8 @@
 ---
 date: 2017-03-01 14:30
 layout: post
-title: JDK-ArrayList类源代码分析
-categories: java
+title: java.util.ArrayList 源代码阅读
+categories: jdk1.7
 ---
 ArrayList是List类的一个典型的实现，是基于数组实现的List类，因此，ArrayList封装了一个动态的、可变长度的Object[]数组。ArrayList是通过initialCapacity参数来设置数组长度的，当向ArrayList添加的数据超出了ArrayList的长度之后，initialCapacity会自动增加。  
 
