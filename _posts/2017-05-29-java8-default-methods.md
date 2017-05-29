@@ -12,3 +12,123 @@ categories: java8
 Default methods enable you to add new functionality to the interfaces of your libraries and ensure binary compatibility with code written for older versions of those interfaces.
 
 默认方法允许您向现有库的接口中添加新的功能，并能确保与采用旧版本接口编写的代码的二进制兼容性。
+
+看下面的接口：
+```java
+package defaultmethods;
+
+import java.time.LocalDateTime;
+
+public interface TimeClient {
+	void setTime(int hour, int minute, int second);
+    void setDate(int day, int month, int year);
+    void setDateAndTime(int day, int month, int year,
+                               int hour, int minute, int second);
+    LocalDateTime getLocalDateTime();
+}
+```
+
+下面的类 SimpleTimeClient 实现了 TimeClient 接口
+```java
+package defaultmethods;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+public class SimpleTimeClient implements TimeClient {
+
+	private LocalDateTime dateAndTime;
+
+	public SimpleTimeClient() {
+		dateAndTime = LocalDateTime.now();
+	}
+
+	public void setTime(int hour, int minute, int second) {
+		LocalDate currentDate = LocalDate.from(dateAndTime);
+		LocalTime timeToSet = LocalTime.of(hour, minute, second);
+		dateAndTime = LocalDateTime.of(currentDate, timeToSet);
+	}
+
+	public void setDate(int day, int month, int year) {
+		LocalDate dateToSet = LocalDate.of(day, month, year);
+		LocalTime currentTime = LocalTime.from(dateAndTime);
+		dateAndTime = LocalDateTime.of(dateToSet, currentTime);
+	}
+
+	public void setDateAndTime(int day, int month, int year, int hour, int minute, int second) {
+		LocalDate dateToSet = LocalDate.of(day, month, year);
+		LocalTime timeToSet = LocalTime.of(hour, minute, second);
+		dateAndTime = LocalDateTime.of(dateToSet, timeToSet);
+	}
+
+	public LocalDateTime getLocalDateTime() {
+		return dateAndTime;
+	}
+
+	public String toString() {
+		return dateAndTime.toString();
+	}
+
+	public static void main(String... args) {
+		TimeClient myTimeClient = new SimpleTimeClient();
+		System.out.println(myTimeClient.toString());
+	}
+
+}
+
+```
+
+假设您要向 TimeClient 接口中添加新的功能，例如通过ZonedDateTime对象指定时区的功能（它类似于LocalDateTime对象，除了它存储时区信息）：
+```java
+package defaultmethods;
+
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
+public interface TimeClient {
+	void setTime(int hour, int minute, int second);
+    void setDate(int day, int month, int year);
+    void setDateAndTime(int day, int month, int year,
+                               int hour, int minute, int second);
+    LocalDateTime getLocalDateTime();
+    //新功能
+    ZonedDateTime getZonedDateTime(String zoneString);
+}
+
+```
+
+随着对 TimeClient 接口的修改，您还必须修改 SimpleTimeClient 类并实现 getZonedDateTime 方法。
+然而，您可以改为定义一个默认的实现，而不是将 getZonedDateTime 作为抽象方法（abstract）。（请记住，抽象方法是一个声明为没有实现的方法。）
+```java
+package defaultmethods;
+
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public interface TimeClient {
+	void setTime(int hour, int minute, int second);
+    void setDate(int day, int month, int year);
+    void setDateAndTime(int day, int month, int year,
+                               int hour, int minute, int second);
+    LocalDateTime getLocalDateTime();
+    
+    static ZoneId getZoneId (String zoneString) {
+        try {
+            return ZoneId.of(zoneString);
+        } catch (DateTimeException e) {
+            System.err.println("Invalid time zone: " + zoneString +
+                "; using default time zone instead.");
+            return ZoneId.systemDefault();
+        }
+    }
+        
+    default ZonedDateTime getZonedDateTime(String zoneString) {
+        return ZonedDateTime.of(getLocalDateTime(), getZoneId(zoneString));
+    }
+}
+
+```
+### Static Methods
