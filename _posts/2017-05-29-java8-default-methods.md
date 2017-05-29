@@ -28,7 +28,7 @@ public interface TimeClient {
 }
 ```
 
-下面的类 SimpleTimeClient 实现了 TimeClient 接口
+下面的类 SimpleTimeClient 实现了 TimeClient 接口：
 ```java
 package defaultmethods;
 
@@ -79,7 +79,7 @@ public class SimpleTimeClient implements TimeClient {
 
 ```
 
-假设您要向 TimeClient 接口中添加新的功能，例如通过ZonedDateTime对象指定时区的功能（它类似于LocalDateTime对象，除了它存储时区信息）：
+假设您要向 TimeClient 接口中添加新的功能，例如通过 ZonedDateTime 对象指定时区的功能（它类似于 LocalDateTime 对象，除了它存储时区信息）：
 ```java
 package defaultmethods;
 
@@ -130,5 +130,20 @@ public interface TimeClient {
     }
 }
 
+```
+
+在接口中,您可以在方法签名的开头使用 default 关键字指定一个默认方法。在接口中的所有方法声明，包括默认方法，都是 public，这样你就可以省略了 public 修饰符。
+
+有了这个接口，您不必修改类 SimpleTimeClient ，并且这个类（以及实现接口 TimeClient 的任何类），已经定义了 getZonedDateTime 方法。下面的例子，TestSimpleTimeClient，从 SimpleTimeClient 的一个实例调用 getZonedDateTime 方法：
+```java
+package defaultmethods;
+
+public class TestSimpleTimeClient {
+	public static void main(String... args) {
+		TimeClient myTimeClient = new SimpleTimeClient();
+		System.out.println("Current time: " + myTimeClient.toString());
+		System.out.println("Time in California: " + myTimeClient.getZonedDateTime("Blah blah").toString());
+	}
+}
 ```
 ### Static Methods
