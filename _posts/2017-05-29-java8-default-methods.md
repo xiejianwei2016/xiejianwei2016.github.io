@@ -163,7 +163,7 @@ package defaultmethods;
 public interface AbstractZoneTimeClient extends TimeClient { }
 
 ```
-实现接口 AnotherTimeClient 的任何类将具有默认方法指定的实现 TimeClient.getZonedDateTime。
+实现接口 AnotherTimeClient 的任何类将具有默认方法 TimeClient.getZonedDateTime 指定的实现。（AnotherTimeClient 接口已经继承了默认方法，它的实现类不必覆写默认方法。）
 
 假设您将如下扩展接口 TimeClient：
 ```java
