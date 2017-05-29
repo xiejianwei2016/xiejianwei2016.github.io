@@ -7,7 +7,7 @@ categories: java8
 
 摘自https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html
 
-### Default Methods
+### 默认方法（Default Methods）
 
 Default methods enable you to add new functionality to the interfaces of your libraries and ensure binary compatibility with code written for older versions of those interfaces.
 
@@ -146,4 +146,77 @@ public class TestSimpleTimeClient {
 	}
 }
 ```
-### Static Methods
+### 接口默认方法的继承（Extending Interfaces That Contain Default Methods）
+当您扩展了包含默认方法的接口时，您可以执行以下三种操作：
+1.不覆写默认方法，直接从父接口中获取方法的默认实现。（继承）
+2.覆写默认方法并将它重新声明为抽象方法，这样新接口的子类必须再次覆写并实现这个抽象方法。
+3.覆写默认方法，这跟类与类之间的覆写规则相类似。
+
+假设您将如下扩展接口 TimeClient：
+```java
+package defaultmethods;
+
+public interface AbstractZoneTimeClient extends TimeClient { }
+
+```
+实现接口 AnotherTimeClient 的任何类将具有默认方法指定的实现 TimeClient.getZonedDateTime。
+
+假设您将如下扩展接口 TimeClient：
+```java
+package defaultmethods;
+
+import java.time.ZonedDateTime;
+
+public interface AbstractZoneTimeClient extends TimeClient {
+    public ZonedDateTime getZonedDateTime(String zoneString);
+}
+
+```
+实现接口 AbstractZoneTimeClient 的任何类都必须实现 getZonedDateTime 方法；这种方法是一种像接口中所有其他非默认（和非静态）方法的抽象方法。
+
+假设您将如下扩展接口 TimeClient：
+```java
+package defaultmethods;
+
+import java.time.DateTimeException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public interface HandleInvalidTimeZoneClient extends TimeClient {
+	default public ZonedDateTime getZonedDateTime(String zoneString) {
+        try {
+            return ZonedDateTime.of(getLocalDateTime(),ZoneId.of(zoneString)); 
+        } catch (DateTimeException e) {
+            System.err.println("Invalid zone ID: " + zoneString +
+                "; using the default time zone instead.");
+            return ZonedDateTime.of(getLocalDateTime(),ZoneId.systemDefault());
+        }
+    }
+}
+
+```
+
+实现接口 HandleInvalidTimeZoneClient的 任何类将使用此接口指定的 getZonedDateTime 的实现，而不是由接口 TimeClient 指定的。
+
+### 静态方法（Static Methods）
+除了默认方法之外，还可以在接口中定义静态方法。（静态方法是与定义它的类相关联的方法，而不是与任何对象相关联的方法。类的每个实例都共享其静态方法。）这使您更容易在库中组织辅助方法;您可以在同一接口中保留特定于接口的静态方法，而不是在单独的类中。以下示例定义了一个静态方法，该方法检索与时区标识符相对应的 ZoneId 对象；如果没有与给定标识符相对应的 ZoneId 对象，则使用系统默认时区。（因此，您可以简化 getZonedDateTime 方法。）
+```java
+public interface TimeClient {
+    // ...
+    static public ZoneId getZoneId (String zoneString) {
+        try {
+            return ZoneId.of(zoneString);
+        } catch (DateTimeException e) {
+            System.err.println("Invalid time zone: " + zoneString +
+                "; using default time zone instead.");
+            return ZoneId.systemDefault();
+        }
+    }
+
+    default public ZonedDateTime getZonedDateTime(String zoneString) {
+        return ZonedDateTime.of(getLocalDateTime(), getZoneId(zoneString));
+    }    
+}
+```
+
+像类中的静态方法一样，在接口中定义静态方法需要在方法签名的开头使用 static 关键字。接口中的所有方法声明，包括静态方法，都是 public 的，所以你可以省略 public 修饰符。
