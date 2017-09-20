@@ -37,36 +37,9 @@ categories: java8
 假设您正在创建一个社交网络应用程序。您希望创建一个功能，使管理员能够对符合特定条件的社交网络应用程序的成员执行任何类型的操作（例如发送消息）。下表详细描述了这种用例：
 
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| 领域          | 描述
+| ------------- |-------------
+| 名称          | 对所选成员执行操作
+| 主演员        | 管理员
+| 前提条件      | 管理员已登录到系统。
 
-
-<table>
-        <tr>
-            <th>设备</th>
-            <th>设备文件名</th>
-            <th>文件描述符</th>
-            <th>类型</th>
-        </tr>
-        <tr>
-            <th>键盘</th>
-            <th>/dev/stdin</th>
-            <th>0</th>
-            <th>标准输入</th>
-        </tr>
-        <tr>
-            <th>显示器</th>
-            <th>/dev/stdout</th>
-            <th>1</th>
-            <th>标准输出</th>
-        </tr>
-        <tr>
-            <th>显示器</th>
-            <th>/dev/stderr</th>
-            <th>2</th>
-            <th>标准错误输出</th>
-        </tr>
-    </table>
