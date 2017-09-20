@@ -4,3 +4,5 @@ layout: post
 title: java8 lambda表达式
 categories: java8
 ---
+
+摘自http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html
