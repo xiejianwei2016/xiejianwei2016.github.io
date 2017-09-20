@@ -45,10 +45,7 @@ categories: java8
 		
 
 
-
-
-
-		<table>
+<table>
         <tr>
             <th>设备</th>
             <th>设备文件名</th>
@@ -74,6 +71,3 @@ categories: java8
             <th>标准错误输出</th>
         </tr>
     </table>
-
-
-
