@@ -48,5 +48,4 @@ categories: java8
 | 发生频率      | 白天很多次
 
 
-假设这个社交网络应用程序的成员由以下[Person](http://docs.oracle.com/javase/tutorial/java/javaOO/examples/Person.java)类代表 ：
-
+假设这个社交网络应用程序的成员由以下[Person](http://docs.oracle.com/javase/tutorial/java/javaOO/examples/Person.java){:target="_blank"}类代表 ：
