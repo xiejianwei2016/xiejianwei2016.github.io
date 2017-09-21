@@ -49,3 +49,28 @@ categories: java8
 
 
 假设这个社交网络应用程序的成员由以下[Person](http://docs.oracle.com/javase/tutorial/java/javaOO/examples/Person.java){:target="_blank"}类代表 ：
+
+
+```java
+	public class Person {
+
+	    public enum Sex {
+	        MALE, FEMALE
+	    }
+
+	    String name;
+	    LocalDate birthday;
+	    Sex gender;
+	    String emailAddress;
+
+	    public int getAge() {
+	        // ...
+	    }
+
+	    public void printPerson() {
+	        // ...
+	    }
+	}
+```
+
+
