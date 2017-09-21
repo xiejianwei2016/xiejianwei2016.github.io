@@ -47,3 +47,6 @@ categories: java8
 | 扩展          | 1A。管理员可以选择在指定要执行的操作之前或选择提交按钮之前预览符合指定条件的成员。
 | 发生频率      | 白天很多次
 
+
+假设这个社交网络应用程序的成员由以下[Person](http://docs.oracle.com/javase/tutorial/java/javaOO/examples/Person.java)类代表 ：
+
