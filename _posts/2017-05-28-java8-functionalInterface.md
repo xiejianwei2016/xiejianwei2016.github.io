@@ -40,4 +40,5 @@ public @interface FunctionalInterface {}
 总结：
 *   <font color="#FF0000">如果我们在某个接口上声明了FunctionalInterface注解，那么编译器会按照函数式接口的定义来要求该接口。</font>
 
+
 *   <font color="#FF0000">如果某个接口只有一个抽象方法，但我们并没有给该接口声明FunctionalInterface注解，那么编译器依旧会将该接口看做是函数式接口。</font>
