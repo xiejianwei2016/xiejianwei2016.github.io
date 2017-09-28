@@ -4,13 +4,11 @@ layout: post
 title: java.lang.Object 源代码阅读
 categories: jdk1.7
 ---
-
+----------------------------------------
 java.lang.Object类作为类继承层次中的根。Obejct是所有类的父类。所有对象，包括数组，
 都实现了Object 类中的方法。
 
 ### 1. Object 类的 toString() 方法
-----------------------------------------
-
 ```java
 	public String toString() {
 		return getClass().getName() + "@" + Integer.toHexString(hashCode());
