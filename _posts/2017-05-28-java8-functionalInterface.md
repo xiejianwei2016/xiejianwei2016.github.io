@@ -44,7 +44,35 @@ public @interface FunctionalInterface {}
 
 ### 3.常用的函数式接口
 ----------------------------------------
-Java 8 新增加的函数式接口位于 java.util.function 包下
+Java 8 新增加的函数式接口位于 java.util.function 包下。
 
 #### 1) Function
+
 java.util.function.Function
+
+让我们看看 javadoc 是怎么描述的？
+
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+
+    R apply(T t);
+
+    default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+        Objects.requireNonNull(before);
+        return (V v) -> apply(before.apply(v));
+    }
+ 
+    default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+        Objects.requireNonNull(after);
+        return (T t) -> after.apply(apply(t));
+    }
+  
+    static <T> Function<T, T> identity() {
+        return t -> t;
+    }
+}
+```
+
+表示一个函数，接收一个参数，产生一个结果。
+这是一个函数式接口，函数式方法是 apply(Object)。
