@@ -46,9 +46,7 @@ public @interface FunctionalInterface {}
 ----------------------------------------
 Java 8 新增加的函数式接口位于 java.util.function 包下。
 
-#### 1) Function
-
-java.util.function.Function
+#### 1) Function（java.util.function.Function）
 
 让我们看看 javadoc 是怎么描述的？
 
@@ -74,5 +72,21 @@ public interface Function<T, R> {
 }
 ```
 
-表示一个函数，接收一个参数，产生一个结果。
-这是一个函数式接口，函数式方法是 apply(Object)。
+表示一个函数，接受一个参数，产生一个结果。  
+这是一个函数式接口，函数式方法是 apply(Object)。  
+T - 输入类型
+R - 结果类型
+----------------------------------------
+抽象方法：
+```java
+R apply(T t);
+```
+将此函数应用于给定的参数。它接受一个泛型 T 的对象，返回一个泛型 R 的对象。
+----------------------------------------
+默认方法：
+```java
+default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+    Objects.requireNonNull(before);
+    return (V v) -> apply(before.apply(v));
+}
+```
