@@ -44,3 +44,7 @@ public @interface FunctionalInterface {}
 
 ### 3.常用的函数式接口
 ----------------------------------------
+Java 8 新增加的函数式接口位于 java.util.function 包下
+
+#### 1) Function
+java.util.function.Function
