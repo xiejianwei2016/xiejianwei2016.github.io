@@ -46,7 +46,7 @@ public @interface FunctionalInterface {}
 ----------------------------------------
 Java 8 新增加的函数式接口位于 java.util.function 包下。
 
-#### 1) Function（java.util.function.Function）
+#### 1). Function（java.util.function.Function）
 
 让我们看看 javadoc 是怎么描述的？
 
@@ -115,3 +115,6 @@ after - 在应用当前函数之后，所应用的函数。
 ```java
 static <T> Function<T, T> identity() { return t -> t; }
 ```
+返回一个函数，总是返回输入参数。  
+T - 函数的输入和输出对象的类型。  
+返回：一个函数，总是返回输入参数。
