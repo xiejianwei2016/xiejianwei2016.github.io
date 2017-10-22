@@ -92,3 +92,7 @@ default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
     return (V v) -> apply(before.apply(v));
 }
 ```
+返回一个组合函数，首先对输入参数应用 before 函数，然后对（before 函数得到的）结果（作为参数）应用当前函数。如果任何一个函数的计算抛出了异常，取决于组合函数的调用者。  
+V - before 函数 和 组合函数 的输入类型。  
+before - 在应用当前函数之前，所应用的函数。
+返回：一个组合函数，首先应用 before 函数，然后应用当前函数。
