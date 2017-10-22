@@ -94,5 +94,24 @@ default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
 ```
 返回一个组合函数，首先对输入参数应用 before 函数，然后对（before 函数得到的）结果（作为参数）应用当前函数。如果任何一个函数的计算抛出了异常，取决于组合函数的调用者。  
 V - before 函数 和 组合函数 的输入类型。  
-before - 在应用当前函数之前，所应用的函数。
+before - 在应用当前函数之前，所应用的函数。  
 返回：一个组合函数，首先应用 before 函数，然后应用当前函数。
+
+----------------------------------------
+默认方法：
+```java
+default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+    Objects.requireNonNull(after);
+    return (T t) -> after.apply(apply(t));
+}
+```
+返回一个组合函数，首先对输入参数应用 当前函数，然后对（当前函数得到的）结果（作为参数）应用 after 函数。如果任何一个函数的计算抛出了异常，取决于组合函数的调用者。  
+V - after 函数 和组合函数的输出类型。  
+after - 在应用当前函数之后，所应用的函数。  
+返回：一个组合函数，首先应用当前函数，然后应用 after 函数。
+
+----------------------------------------
+静态方法：
+```java
+static <T> Function<T, T> identity() { return t -> t; }
+```
