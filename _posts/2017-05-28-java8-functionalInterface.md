@@ -115,6 +115,53 @@ after - 在应用当前函数之后，所应用的函数。
 ```java
 static <T> Function<T, T> identity() { return t -> t; }
 ```
-返回一个函数，总是返回输入参数。  
+返回一个函数，总是返回输入参数。（同一性）  
 T - 函数的输入和输出对象的类型。  
 返回：一个函数，总是返回输入参数。
+
+----------------------------------------
+#### 2). BiFunction（java.util.function.BiFunction）
+
+让我们看看 javadoc 是怎么描述的？
+
+```java
+@FunctionalInterface
+public interface BiFunction<T, U, R> {
+
+    R apply(T t, U u);
+
+    default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
+        Objects.requireNonNull(after);
+        return (T t, U u) -> after.apply(apply(t, u));
+    }
+}
+```
+表示一个函数，接受两个参数，产生一个结果。这是 Function 的两个参数的一种特化形式。  
+这是一个函数式接口，函数式方法是 apply(Object, Object)。  
+T - 函数的第一个参数类型  
+U - 函数的第二个参数类型  
+R - 函数的结果类型
+
+----------------------------------------
+抽象方法：
+```java
+R apply(T t, U u);
+```
+对输入参数应用当前函数。它接受一个泛型 T 和一个泛型 U 的对象，返回一个泛型 R 的对象。
+
+----------------------------------------
+默认方法：
+```java
+default <V> BiFunction<T, U, V> andThen(Function<? super R, ? extends V> after) {
+    Objects.requireNonNull(after);
+    return (T t, U u) -> after.apply(apply(t, u));
+}
+```
+返回一个组合函数，首先对输入参数应用当前函数，然后对（当前函数得到的）结果（作为参数）应用 after 函数。如果任何一个函数的计算抛出了异常，取决于组合函数的调用者。  
+V - after 函数和组合函数的输出类型  
+after - 在应用当前函数之后，所应用的函数。  
+返回：一个组合函数，首先应用当前函数，然后应用 after 函数。
+
+----------------------------------------
+思考一个问题：为什么 BiFunction 接口中 没有 compose 方法 和 identity 方法？  
+首先说 compose 方法。如果有 compose 方法，那么参数一定是 BiFunction 类型的，而 compose 方法会先对输入应用 BiFunction 函数，会返回一个结果，然后再对结果应用当前的 BiFunction 函数，那么矛盾产生了。<font color="#FF0000">BiFuntion 函数的输入需要两个参数，而即将作为参数的结果只有一个。因为 BiFunction 函数接受连个参数，只返回一个结果。</font>
