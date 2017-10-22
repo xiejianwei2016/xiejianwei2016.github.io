@@ -164,4 +164,4 @@ after - 在应用当前函数之后，所应用的函数。
 
 ----------------------------------------
 思考一个问题：为什么 BiFunction 接口中 没有 compose 方法 和 identity 方法？  
-首先说 compose 方法。如果有 compose 方法，那么参数一定是 BiFunction 类型的，而 compose 方法会先对输入应用 BiFunction 函数，会返回一个结果，然后再对结果应用当前的 BiFunction 函数，那么矛盾产生了。<font color="#FF0000">BiFuntion 函数的输入需要两个参数，而即将作为参数的结果只有一个。因为 BiFunction 函数接受连个参数，只返回一个结果。</font>
+首先说 compose 方法。如果有 compose 方法，那么参数一定是 BiFunction 类型的，而 compose 方法会先对输入应用 BiFunction 函数，会返回一个结果，然后再对结果应用当前的 BiFunction 函数，那么矛盾产生了。<font color="#FF0000">BiFuntion 函数的输入需要两个参数，而即将作为参数的结果只有一个。因为 BiFunction 函数接受两个参数，只返回一个结果。</font>
